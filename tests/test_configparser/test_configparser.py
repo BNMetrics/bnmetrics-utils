@@ -34,7 +34,7 @@ class TestConfigParser:
     def test_init_from_dict(self):
         config = ConfigParser.from_dict(data.config_dict)
 
-        print(config.to_dict())
+        assert set(config.sections()) == {'my_config', 'Fish_Profiles'}
 
     # ---------------------------------------------------------------------------
     # Tests for .to_dict() and helper methods

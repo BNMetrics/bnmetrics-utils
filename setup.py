@@ -25,7 +25,7 @@ setup(
     description='Compilations of various utilities',
     long_description=readme,
     author='Luna Chen',
-    # url='https://github.com/BNMetrics/logme',
+    url='https://github.com/BNMetrics/bnmetrics-utils',
     author_email='luna@bnmetrics.com',
     keywords=['configparser', '.ini', 'docstring'],
     python_requires='>=3',

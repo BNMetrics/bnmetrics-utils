@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 
 from bnmutils import ConfigParser
-from bnmutils.exceptions import InvalidConfig, InvalidOption
+from bnmutils.exceptions import InvalidConfig, InvalidConfigOption
 
 from . import data
 
@@ -128,7 +128,7 @@ class TestConfigParser:
                               pytest.param("\nhello: hi\nbye", id='when string option passed is in invalid format'),
                               ])
     def test_option_to_dict_raise_invalidoption(self, parse_option):
-        with pytest.raises(InvalidOption):
+        with pytest.raises(InvalidConfigOption):
             self.config._option_to_dict(parse_option)
 
     def test_option_to_dict_raise_option_none_dict(self):

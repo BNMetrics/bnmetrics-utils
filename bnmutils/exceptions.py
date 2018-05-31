@@ -1,5 +1,4 @@
-
-class InvalidOption(Exception):
+class InvalidConfigOption(Exception):
     """Used when the option in config file is invalid"""
 
 

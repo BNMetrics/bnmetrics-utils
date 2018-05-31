@@ -85,13 +85,15 @@ class ConfigParser(BuiltinConfigParser):
 
             return dict(mapped_list)  # raises ValueError
         except AttributeError:
-            raise InvalidConfigOption(f"option passed must be a string value, not type of '{type(parse_option).__name__}'.")
+            raise InvalidConfigOption(f"option passed must be a string value, "
+                                      f"not type of '{type(parse_option).__name__}'.")
         except ValueError:
             if '\n' not in parse_option:
                 raise ValueError(f"'{parse_option}' cannot be converted to dict. alternatively, "
                                  f"use ConfigParser.get(section, value) to get the value.")
 
-            raise InvalidConfigOption(f"{parse_option} is not a valid option, please follow the convention of 'key: value'")
+            raise InvalidConfigOption(f"{parse_option} is not a valid option, "
+                                      f"please follow the convention of 'key: value'")
 
     def _section_to_dict(self, config_section: Union[List[tuple], dict]) -> dict:
         """

@@ -1,4 +1,5 @@
 import pytest
+from pathlib import Path
 
 from bnmutils import ConfigParser
 from bnmutils.exceptions import InvalidConfig, InvalidOption
@@ -24,6 +25,19 @@ class TestConfigParser:
     def test_init_from_files(self, filenames):
         config = ConfigParser.from_files(filenames)
         assert set(config.sections()) == {'my_config', 'Fish_Profiles'}
+
+    def test_init_from_files_empty(self, tmpdir):
+        file = tmpdir.join('foo.ini')
+        file.open('w').close()
+
+        assert Path(file).exists()
+
+        with pytest.raises(InvalidConfig):
+            ConfigParser.from_files(file)
+
+    def test_init_from_files_non_exist(self):
+        with pytest.raises(InvalidConfig):
+            ConfigParser.from_files('blah.ini')
 
     def test_init_from_files_raise(self, tmpdir):
         ini_path = tmpdir.join('test.ini')
@@ -77,6 +91,21 @@ class TestConfigParser:
         result = self.config._option_to_dict(parse_option)
 
         assert result == expected
+
+    @pytest.mark.parametrize('parse_option',
+                             [pytest.param(" \ntype: option \n second_val : my_val ",
+                                           id='config options with blank space in the beginning and middle'),
+                              pytest.param("\n  type  : option    \n  second_val : my_val \n",
+                                           id='config option with blank space after new line, '
+                                              'and new line after last option'),
+                              pytest.param("\ntype: option \nsecond_val: my_val ",
+                                           id='config option with no blank space')])
+    def test_conf_item_to_dict(self, parse_option):
+        expected_dict = {'type': 'option',
+                         'second_val': 'my_val'}
+        output = self.config._option_to_dict(parse_option)
+
+        assert expected_dict == output
 
     def test_option_to_dict_multiple_colons(self):
         parse_item = '\nactive: True' \

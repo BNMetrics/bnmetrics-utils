@@ -144,8 +144,6 @@ class TestConfigParser:
                          ('Active', 'True'),
                          ('Posts', 'None')]
 
-        print(dict(parse_section))
-
         expected = {
             'profile': {
                 'name': 'Luna',

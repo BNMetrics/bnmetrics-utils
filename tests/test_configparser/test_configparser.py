@@ -79,6 +79,18 @@ class TestConfigParser:
         with pytest.raises(ValueError):
             config.to_dict(option='profile')
 
+    def test_to_dict_with_datefmt(self):
+        config = ConfigParser.from_files(data.config_path)
+        expected = {
+            'formatter': {
+                'fmt': '{asctime} - {name} - {levelname} - {message}',
+                'datefmt': '%Y/%m/%d',
+                'style': '{'
+            },
+            'Active': True
+        }
+        assert config.to_dict(section='date_format', raw=True) == expected
+
     def test_option_to_dict(self):
         parse_option = "\nclownfish: 2\nchalk_goby:1\nyellow_clown_goby: 1"
 

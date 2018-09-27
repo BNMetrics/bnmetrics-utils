@@ -46,7 +46,7 @@ class ConfigParser(BuiltinConfigParser):
 
         return obj
 
-    def to_dict(self, section: str=None, option: str=None):
+    def to_dict(self, section: str=None, option: str=None, **kwargs):
         """
 
         :param section:
@@ -61,7 +61,7 @@ class ConfigParser(BuiltinConfigParser):
             return self._option_to_dict(option_str)
 
         if section:
-            section_list = self.items(section)
+            section_list = self.items(section, **kwargs)
             return self._section_to_dict(section_list)
 
         config_dict = {}

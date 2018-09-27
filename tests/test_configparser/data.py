@@ -34,6 +34,14 @@ config_dict = {
                     'toadstool': 2,
                     'ricordia': 1,
                     'euphyllia': 2}
+            },
+            'date_format': {
+                'formatter': {
+                    'fmt': '{asctime} - {name} - {levelname} - {message}',
+                    'datefmt': '%Y/%m/%d',
+                    'style': '{'
+                },
+                'Active': True
             }
 
         }

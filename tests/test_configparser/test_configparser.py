@@ -24,7 +24,7 @@ class TestConfigParser:
                              ])
     def test_init_from_files(self, filenames):
         config = ConfigParser.from_files(filenames)
-        assert set(config.sections()) == {'my_config', 'Fish_Profiles'}
+        assert set(config.sections()) == {'my_config', 'Fish_Profiles', 'date_format'}
 
     def test_init_from_files_empty(self, tmpdir):
         file = tmpdir.join('foo.ini')
@@ -48,7 +48,7 @@ class TestConfigParser:
     def test_init_from_dict(self):
         config = ConfigParser.from_dict(data.config_dict)
 
-        assert set(config.sections()) == {'my_config', 'Fish_Profiles'}
+        assert set(config.sections()) == {'my_config', 'Fish_Profiles', 'date_format'}
 
     # ---------------------------------------------------------------------------
     # Tests for .to_dict() and helper methods
@@ -89,7 +89,7 @@ class TestConfigParser:
             },
             'Active': True
         }
-        assert config.to_dict(section='date_format', raw=True) == expected
+        assert config.to_dict(section='date_format') == expected
 
     def test_option_to_dict(self):
         parse_option = "\nclownfish: 2\nchalk_goby:1\nyellow_clown_goby: 1"

@@ -2,7 +2,7 @@ import os
 
 from typing import Iterable, Union, List
 
-from configparser import ConfigParser as BuiltinConfigParser
+from configparser import RawConfigParser as BuiltinConfigParser
 
 from .exceptions import InvalidConfig, InvalidConfigOption
 from .novelty import strip_blank_recursive, str_eval

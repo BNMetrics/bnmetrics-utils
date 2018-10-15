@@ -26,7 +26,7 @@ class ConfigParser(BuiltinConfigParser):
             filenames = [str(i) for i in filenames]
 
         obj = cls(*args, **kwargs)
-        obj.read(filenames, encoding=None)
+        obj.read(filenames, encoding)
 
         if not obj.sections():
             raise InvalidConfig(f"Ivalid config file/files: {filenames}.")

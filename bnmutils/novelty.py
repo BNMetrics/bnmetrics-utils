@@ -1,5 +1,6 @@
 import os
 import ast
+from pathlib import Path
 from functools import wraps
 from contextlib import contextmanager
 
@@ -70,3 +71,13 @@ def str_eval(parse_str: str):
         val = parse_str.strip()
 
     return val
+
+
+def is_pypkg(path: Path) -> bool:
+    """
+    Check if the input path is a python package
+    """
+    if (path / '__init__.py').exists():
+        return True
+
+    return False

@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
 
-from bnmutils.novelty import doc_parametrize, cd, strip_blank_recursive, str_eval
+from bnmutils.novelty import doc_parametrize, cd, strip_blank_recursive, str_eval, is_pypkg
 
 
 def test_doc_parametrize():
@@ -69,3 +69,9 @@ def test_str_eval(parse_str, expected):
     result = str_eval(parse_str)
 
     assert result == expected
+
+
+def test_is_pypkg():
+    path = Path(__file__).parent / 'test_configparser'
+    assert is_pypkg(path)
+    assert not is_pypkg(Path(__file__))

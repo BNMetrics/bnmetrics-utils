@@ -29,7 +29,7 @@ class ConfigParser(BuiltinConfigParser):
         obj.read(filenames, encoding)
 
         if not obj.sections():
-            raise InvalidConfig(f"Ivalid config file/files: {filenames}.")
+            raise InvalidConfig(f"Invalid config file/files: {filenames}.")
 
         return obj
 
